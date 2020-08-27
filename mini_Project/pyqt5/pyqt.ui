@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>511</width>
+    <height>324</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QPushButton" name="ledOn">
+   <property name="geometry">
+    <rect>
+     <x>21</x>
+     <y>127</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ledOn</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ledOff">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>127</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ledOff</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="temp">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>72</y>
+     <width>73</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="humi">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>71</y>
+     <width>73</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="textBrowser">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>30</y>
+     <width>261</width>
+     <height>91</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>40</y>
+     <width>73</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>온도</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>39</y>
+     <width>73</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>습도</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="leftM">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>202</y>
+     <width>61</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>왼쪽</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="stopM">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>202</y>
+     <width>61</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>정지</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="rightM">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>202</y>
+     <width>61</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>오른쪽</string>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="textBrowser_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>172</y>
+     <width>181</width>
+     <height>61</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>79</x>
+     <y>176</y>
+     <width>73</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>모터제어</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="cam">
+   <property name="geometry">
+    <rect>
+     <x>299</x>
+     <y>29</y>
+     <width>191</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-color: rgb(0, 0, 0);
+background-color: rgb(0, 0, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="left">
+   <property name="geometry">
+    <rect>
+     <x>299</x>
+     <y>204</y>
+     <width>41</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>←</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="up">
+   <property name="geometry">
+    <rect>
+     <x>349</x>
+     <y>204</y>
+     <width>41</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>↑</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="down">
+   <property name="geometry">
+    <rect>
+     <x>399</x>
+     <y>204</y>
+     <width>41</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>↓</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="right">
+   <property name="geometry">
+    <rect>
+     <x>449</x>
+     <y>204</y>
+     <width>41</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>→</string>
+   </property>
+  </widget>
+  <zorder>textBrowser_2</zorder>
+  <zorder>textBrowser</zorder>
+  <zorder>ledOn</zorder>
+  <zorder>ledOff</zorder>
+  <zorder>temp</zorder>
+  <zorder>humi</zorder>
+  <zorder>label</zorder>
+  <zorder>label_2</zorder>
+  <zorder>leftM</zorder>
+  <zorder>stopM</zorder>
+  <zorder>rightM</zorder>
+  <zorder>label_3</zorder>
+  <zorder>cam</zorder>
+  <zorder>left</zorder>
+  <zorder>up</zorder>
+  <zorder>down</zorder>
+  <zorder>right</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
