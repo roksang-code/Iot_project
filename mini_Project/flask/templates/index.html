@@ -1,0 +1,177 @@
+<html>
+<head>
+	<title>Pet Feeder</title>
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+<body>
+	{% for i in state %}
+	<h1>스마트홈</h1>
+	  <form action="/serial" method="post">	
+		<div class="input-group">
+			<p class = 'temp'>온도:</p> <p class ='humi'>/ 습도:</p>
+		</div>
+		<a>실내온도 AUTO설정 </a><br>
+		<div class="input-group">
+			<input type="number" id='autoT' value="{{i[5]}}" maxlength="2" min="16" max="25" style="border-right:none">
+			<input type="txet" value="°C" style="border-left:none" size="1px" readonly>
+			<input type="button" value= "{{i[4]}}" id='autoP'class='btn btn-secondary'>
+		</div>
+			<br>
+	       <a>전등</a><br>
+	       <div class="input-group">
+			<input type="button" value='거실{{i[0]}}' name='on' id='20' class='btn btn-secondary led'>
+			<input type="button" value='안방{{i[1]}}' name='on' id='21' class='btn btn-secondary led'>
+           </div>
+            <br>
+            <br>
+			<style>
+				input[type="number"]::-webkit-inner-spin-button {
+					width: 30px;
+					height: 30px;
+				}
+			</style>
+           <a>에어컨</a><br>
+			<div class="input-group mb-1">
+				<input type="number" id="airT" value="{{i[3]}}"  maxlength="2" min="16" max="25" style="border-right:none">
+				<input type="txet" value="°C" style="border-left:none" size="1px" readonly>
+				<input type="button" value="{{i[2]}}" id="airP" class='btn btn-secondary'>  
+			</div>
+	<br><br>
+	<a>CCTV</a><br>
+ 	<img src="{{ url_for('video_feed') }}"><br>
+ 	<div class="input-group">
+		<input type="button" value=' ←' class='btn btn-secondary cctvC' id='left'>
+		<input type="button" value='↑ ' class='btn btn-secondary cctvC' id='up'>
+		<input type="button" value=' ↓' class='btn btn-secondary cctvC' id='down'>
+		<input type="button" value='→ ' class='btn btn-secondary cctvC' id='right'>
+ 	</div>
+	{% endfor %}
+	<script type="text/javascript">
+	$(document).ready(function() {
+
+		$(document).on("click", ".cctvC", function() {
+			var way = $(this).attr("id");
+			$.ajax({
+				type : "POST",
+				url : "{{ url_for('cctvCont') }}",
+				data : {
+					way : way
+				},
+				dataType : "text",
+				error : function(request,status,error){
+					alert("code:"+request.status+"\n"+"error:"+error);
+				}
+			});
+		});
+		
+		
+		$(document).on("click", ".led", function() {
+			var led = $(this).attr("id");
+			var action = $(this).attr("name");
+			$.ajax({
+				type : "POST", <!--[GET / POST] 둘중 하나 선택-->
+				url : "{{ url_for('ledOnOff') }}",
+				data : {
+					led : led,
+					action : action
+				},
+				dataType : "JSON",
+				success : function(result){
+					$("#"+led).attr("name",result[1]);
+					var ledval = ($("#"+led).val()).substr(0,2);
+					$("#"+led).val(ledval+result[1]);
+				},
+				error : function(xtr,status,error){
+					alert("실패");
+				}
+			});
+		});
+		$(document).on("click", "#autoP", function() {
+			var autoP = $("#autoP").val();
+			if(autoP == "on"){
+				$("#autoP").val("off");
+			}else{
+				$("#autoP").val("on");
+			}
+		});
+
+
+		setInterval( function(){
+			var power = $("#airP").val();
+			var air_temp = $("#airT").val();
+			var autoP = $("#autoP").val();
+			var auto_temp = $("#autoT").val();
+			
+			$.ajax({
+				type : "POST", 
+				url : "{{ url_for('temp') }}",
+				data : {
+					power : power, air_temp : air_temp,
+					autoP : autoP, auto_temp : auto_temp				
+				},
+				dataType : "JSON",
+
+				success : function(result){
+					$(".temp").text("온도: "+result[0]+"°C");
+					$(".humi").text("/ 습도: "+result[1]+"%");
+					if( result[4] == "off" ){
+						$("#airP").val(result[2]);
+						$("#airT").val(result[3]);
+					}
+				},
+				error : function(xtr,status,error){
+					alert("실패");
+				}
+			});
+		}, 1000);
+		$(document).on("click", "#airP", function() {
+			var power = $("#airP").val();
+			var powerS = $("#airP").val();
+			var air_temp = $("#airT").val();
+			
+			$.ajax({
+				type : "POST",
+				url : "{{ url_for('air') }}",
+				data : {
+					power : power, powerS : powerS,  air_temp : air_temp
+				
+				},
+				dataType : "JSON",
+				success : function(result){
+					$("#airP").val(result);
+				},
+				error : function(xtr,status,error){
+					alert("실패");
+				}
+			});
+		});
+		$(document).on("keyup mouseup", "#airT", function(){
+			var air_temp = $("#airT").val();
+			if($("#airP").val() == "on"){
+				var powerS = "on";
+			}else{
+				var powerS = "off";
+			}
+			$.ajax({
+				type : "POST",
+				url : "{{ url_for('air') }}",
+				data : {
+					power : "nope", powerS : powerS ,air_temp : air_temp
+				},
+				dataType : "JSON",
+				success : function(result){			
+				},
+				error : function(xtr,status,error){
+					alert("실패");
+				}
+			});
+			             
+	    });
+		   
+	});	
+	</script>
+</body>
+    
+</html>
